@@ -102,3 +102,22 @@
     display: none;
   }
 }
+
+@layer utilities {
+  .kanban-column-todo {
+    @apply bg-blue-50 border border-blue-100;
+  }
+  .kanban-column-progress {
+    @apply bg-amber-50 border border-amber-100;
+  }
+  .kanban-column-done {
+    @apply bg-emerald-50 border border-emerald-100;
+  }
+
+  .label-green { @apply bg-emerald-500; }
+  .label-red { @apply bg-red-500; }
+  .label-purple { @apply bg-violet-500; }
+  .label-pink { @apply bg-pink-500; }
+  .label-yellow { @apply bg-yellow-500 text-black; }
+  .label-blue { @apply bg-blue-500; }
+}

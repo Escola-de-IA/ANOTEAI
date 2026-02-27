@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import BoardEditor from "./pages/BoardEditor";
 import Billing from "./pages/Billing";
 import Finance from "./pages/Finance";
+import KanbanBoard from "./pages/KanbanBoard";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/app/board/:id" element={<ProtectedRoute><BoardEditor /></ProtectedRoute>} />
           <Route path="/app/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
           <Route path="/app/finance" element={<ProtectedRoute><Finance /></ProtectedRoute>} />
+          <Route path="/app/kanban" element={<ProtectedRoute><KanbanBoard /></ProtectedRoute>} />
           <Route path="/app/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>

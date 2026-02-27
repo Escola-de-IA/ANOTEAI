@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import BoardCard from '@/components/dashboard/BoardCard';
 import AppLayout from '@/components/layout/AppLayout';
 import { KanbanSquare, Plus, Search } from 'lucide-react';
-import { createDailyKanbanTemplate } from '@/lib/kanbanTemplate';
 
 const Dashboard = () => {
   const { user } = useAuthStore();
@@ -27,9 +26,7 @@ const Dashboard = () => {
   };
 
   const handleCreateKanban = () => {
-    if (!user || !canCreate) return;
-    const board = createBoard('Kanban Diário', user.id, { initialNodes: createDailyKanbanTemplate() });
-    navigate(`/app/board/${board.id}`);
+    navigate('/app/kanban');
   };
 
   return (
