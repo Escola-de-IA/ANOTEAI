@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 187 96% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 20% 94%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 187 96% 92%;
+    --accent-foreground: 187 96% 30%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 187 96% 42%;
+    --radius: 0.75rem;
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 187 96% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 16%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 187 96% 42%;
+    --canvas: 210 40% 98%;
+    --canvas-dot: 214 32% 85%;
+    --toolbar-bg: 0 0% 100%;
+    --node-sticky: 48 96% 89%;
+    --node-sticky-border: 38 92% 50%;
+    --node-rect: 213 94% 93%;
+    --node-rect-border: 217 91% 60%;
+    --node-ellipse: 152 81% 91%;
+    --node-ellipse-border: 160 84% 39%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 187 96% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 47% 15%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 215 16% 60%;
+    --accent: 187 40% 18%;
+    --accent-foreground: 187 96% 70%;
+    --destructive: 0 62% 31%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 187 96% 42%;
+    --canvas: 222 47% 7%;
+    --canvas-dot: 222 30% 20%;
+    --toolbar-bg: 222 47% 10%;
+    --node-sticky: 48 60% 20%;
+    --node-sticky-border: 38 70% 40%;
+    --node-rect: 213 50% 18%;
+    --node-rect-border: 217 70% 45%;
+    --node-ellipse: 152 40% 16%;
+    --node-ellipse-border: 160 60% 35%;
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 187 96% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 187 96% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
