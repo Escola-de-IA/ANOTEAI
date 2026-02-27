@@ -1,13 +1,16 @@
 import { create } from 'zustand';
-import { Board, BoardNode } from '@/types/board'; // Adicionado BoardNode
+import { Board, BoardNode } from '@/types/board';
 import { loadBoards, saveBoards } from '@/lib/storage';
 import { generateId } from '@/lib/ids';
+
+interface CreateBoardOptions {
+  initialNodes?: BoardNode[];
+}
 
 interface BoardStoreState {
   boards: Board[];
   loadAll: () => void;
-  // Atualizado para aceitar initialNodes
-  createBoard: (title: string, ownerId: string, initialNodes?: BoardNode[]) => Board;
+  createBoard: (title: string, ownerId: string, options?: CreateBoardOptions) => Board;
   deleteBoard: (id: string) => void;
   duplicateBoard: (id: string) => Board | null;
   renameBoard: (id: string, title: string) => void;
@@ -19,54 +22,62 @@ export const useBoardStore = create<BoardStoreState>((set, get) => ({
   boards: loadBoards(),
   loadAll: () => set({ boards: loadBoards() }),
 
-  createBoard: (title, ownerId, initialNodes = []) => {
+  createBoard: (title, ownerId, options) => {
     const board: Board = {
-      id: generateId(), 
-      title, 
-      ownerId, 
-      nodes: initialNodes, // Usa os nós iniciais fornecidos ou um array vazio
+      id: generateId(),
+      title,
+      ownerId,
+      nodes: options?.initialNodes ?? [],
       edges: [],
-      createdAt: Date.now(), 
+      createdAt: Date.now(),
       updatedAt: Date.now(),
     };
+
     const boards = [...get().boards, board];
     saveBoards(boards);
     set({ boards });
     return board;
   },
 
-  // ... (mantenha o restante do código inalterado)
   deleteBoard: (id) => {
-    const boards = get().boards.filter(b => b.id !== id);
+    const boards = get().boards.filter((board) => board.id !== id);
     saveBoards(boards);
     set({ boards });
   },
 
   duplicateBoard: (id) => {
-    const orig = get().boards.find(b => b.id === id);
-    if (!orig) return null;
-    const dup: Board = {
-      ...JSON.parse(JSON.stringify(orig)),
-      id: generateId(), title: `${orig.title} (cópia)`,
-      createdAt: Date.now(), updatedAt: Date.now(),
+    const original = get().boards.find((board) => board.id === id);
+    if (!original) return null;
+
+    const duplicate: Board = {
+      ...JSON.parse(JSON.stringify(original)),
+      id: generateId(),
+      title: `${original.title} (cópia)`,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     };
-    const boards = [...get().boards, dup];
+
+    const boards = [...get().boards, duplicate];
     saveBoards(boards);
     set({ boards });
-    return dup;
+    return duplicate;
   },
 
   renameBoard: (id, title) => {
-    const boards = get().boards.map(b => b.id === id ? { ...b, title, updatedAt: Date.now() } : b);
+    const boards = get().boards.map((board) => (
+      board.id === id ? { ...board, title, updatedAt: Date.now() } : board
+    ));
     saveBoards(boards);
     set({ boards });
   },
 
   updateBoard: (board) => {
-    const boards = get().boards.map(b => b.id === board.id ? { ...board, updatedAt: Date.now() } : b);
+    const boards = get().boards.map((current) => (
+      current.id === board.id ? { ...board, updatedAt: Date.now() } : current
+    ));
     saveBoards(boards);
     set({ boards });
   },
 
-  getBoard: (id) => get().boards.find(b => b.id === id),
+  getBoard: (id) => get().boards.find((board) => board.id === id),
 }));
