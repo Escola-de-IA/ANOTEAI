@@ -1,7 +1,8 @@
-import { Board, User } from '@/types/board';
+import { Board, FinanceEntry, User } from '@/types/board';
 
 const BOARDS_KEY = 'boardverse_boards';
 const USER_KEY = 'boardverse_user';
+const FINANCE_KEY = 'boardverse_finance_entries';
 
 export const loadBoards = (): Board[] => {
   try {
@@ -23,4 +24,17 @@ export const loadUser = (): User | null => {
 
 export const saveUser = (user: User) => {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
+};
+
+export const loadFinanceEntries = (): FinanceEntry[] => {
+  try {
+    const d = localStorage.getItem(FINANCE_KEY);
+    return d ? JSON.parse(d) : [];
+  } catch {
+    return [];
+  }
+};
+
+export const saveFinanceEntries = (entries: FinanceEntry[]) => {
+  localStorage.setItem(FINANCE_KEY, JSON.stringify(entries));
 };

@@ -64,3 +64,17 @@ export interface User {
     darkMode: boolean;
   };
 }
+
+export type FinanceEntryType = 'income' | 'expense';
+
+export interface FinanceEntry {
+  id: string;
+  userId: string;
+  title: string;
+  category: string;
+  type: FinanceEntryType;
+  amount: number;
+  date: string;
+  notes?: string;
+  createdAt: number;
+}
