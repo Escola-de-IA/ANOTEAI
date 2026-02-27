@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
-import { LayoutDashboard, CreditCard, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, CreditCard, Settings, LogOut, Wallet } from 'lucide-react';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
@@ -9,6 +9,7 @@ import {
 const navItems = [
   { label: 'Boards', icon: LayoutDashboard, path: '/app' },
   { label: 'Planos', icon: CreditCard, path: '/app/billing' },
+  { label: 'Financeiro', icon: Wallet, path: '/app/finance' },
   { label: 'Configurações', icon: Settings, path: '/app/settings' },
 ];
 

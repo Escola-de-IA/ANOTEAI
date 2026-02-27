@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import BoardCard from '@/components/dashboard/BoardCard';
 import AppLayout from '@/components/layout/AppLayout';
-import { Plus, Search } from 'lucide-react';
+import { KanbanSquare, Plus, Search } from 'lucide-react';
+import { createDailyKanbanTemplate } from '@/lib/kanbanTemplate';
 
 const Dashboard = () => {
   const { user } = useAuthStore();
@@ -22,6 +23,12 @@ const Dashboard = () => {
   const handleCreate = () => {
     if (!user || !canCreate) return;
     const board = createBoard('Novo board', user.id);
+    navigate(`/app/board/${board.id}`);
+  };
+
+  const handleCreateKanban = () => {
+    if (!user || !canCreate) return;
+    const board = createBoard('Kanban Diário', user.id, createDailyKanbanTemplate());
     navigate(`/app/board/${board.id}`);
   };
 
@@ -41,6 +48,9 @@ const Dashboard = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input placeholder="Buscar boards..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9" />
             </div>
+            <Button onClick={handleCreateKanban} disabled={!canCreate} variant="outline" className="shrink-0">
+              <KanbanSquare className="w-4 h-4 mr-2" />Kanban diário
+            </Button>
             <Button onClick={handleCreate} disabled={!canCreate} className="shrink-0">
               <Plus className="w-4 h-4 mr-2" />Novo board
             </Button>
